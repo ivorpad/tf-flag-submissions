@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+model Item {
+  id Int @id @default(autoincrement())
+  itemName String
+  submittedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Author {
+  username String @id
+  reason Reason[]
+  item Item[]
+}
+
+model Reviewer {
+  username String @id
+  reason Reason[]
+}
+
+model Reason {
+ id Int @id @default(autoincrement())
+ author Author @relation(fields: [authorId], references: [username])
+ authorId String
+ reviewer Reviewer @relation(fields: [reviewerId], references: [username])
+ reviewerId String
+ reason String
+ resolved Boolean @default(false)
+ createdAt DateTime @default(now())
+ updatedAt DateTime @default(now())
+}
