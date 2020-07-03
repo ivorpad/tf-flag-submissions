@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "env": {
+   "env": {
     "DATABASE_URL": "@database_url"
   },
   "build": {

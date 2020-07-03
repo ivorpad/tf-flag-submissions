@@ -26,31 +26,31 @@ schema.extendType({
   },
 });
 
-schema.extendType({
-  type: "Mutation",
-  definition(t) {
-    t.field("createOneItem", {
-      type: "Item",
-      nullable: false,
-      args: {
-        itemName: schema.arg({ type: "String" }),
-        authorUsername: schema.arg({ type: "String" }),
-      },
-      async resolve(_parent, args, ctx): Promise<any> {
+// schema.extendType({
+//   type: "Mutation",
+//   definition(t) {
+//     t.field("createOneItem", {
+//       type: "Reason",
+//       nullable: false,
+//       args: {
+//         itemName: schema.arg({ type: "String" }),
+//         authorUsername: schema.arg({ type: "String" }),
+//       },
+//       async resolve(_parent, args, ctx): Promise<any> {
 
-        const author = await ctx.db.author.findOne({ where: { username: args.authorUsername as any } })
-        const findOrCreate = author ? 'connect' : 'create'
-        const item = await ctx.db.item.create({
-          data: {
-            itemName: args.itemName as any,
-            author: {
-              [findOrCreate]: { username: args.authorUsername! },
-            },
-          },
-        });
-        return item;
-      },
-    });
-  },
-});
+//         const author = await ctx.db.author.findOne({ where: { username: args.authorUsername as any } })
+//         const findOrCreate = author ? 'connect' : 'create'
+//         const item = await ctx.db.item.create({
+//           data: {
+//             itemName: args.itemName as any,
+//             author: {
+//               [findOrCreate]: { username: args.authorUsername! },
+//             },
+//           },
+//         });
+//         return item;
+//       },
+//     });
+//   },
+// });
 

@@ -4,13 +4,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model Author {
   username String   @id
   Item     Item[]
-  Reason   Reason[]
+  reason   Reason[]
 }
 
 model Item {
@@ -20,7 +20,7 @@ model Item {
   itemName       String
   submittedAt    DateTime?
   updatedAt      DateTime  @default(now())
-  Author         Author?   @relation(fields: [authorUsername], references: [username])
+  author         Author?   @relation(fields: [authorUsername], references: [username])
 }
 
 model Reason {
@@ -31,11 +31,11 @@ model Reason {
   resolved   Boolean  @default(false)
   reviewerId String
   updatedAt  DateTime @default(now())
-  Author     Author   @relation(fields: [authorId], references: [username])
-  Reviewer   Reviewer @relation(fields: [reviewerId], references: [username])
+  author     Author   @relation(fields: [authorId], references: [username])
+  reviewer   Reviewer @relation(fields: [reviewerId], references: [username])
 }
 
 model Reviewer {
   username String   @id
-  Reason   Reason[]
+  reason   Reason[]
 }

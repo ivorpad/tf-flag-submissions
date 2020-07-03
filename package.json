@@ -1,17 +1,20 @@
 {
   "name": "with-typescript",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "nexus build && next build",
+    "clean": "rm -rf ./dist",
     "start": "next start",
     "nexus:build": "nexus build --deployment vercel",
+    "nexus:start": "node -r esm ./dist",
     "postinstall": "npx prisma generate",
-    "nexus:start": "node ./dist/api",
     "type-check": "tsc"
   },
   "dependencies": {
     "@types/jest": "^26.0.3",
+    "esm": "^3.2.25",
     "next": "latest",
     "nexus": "^0.25.0",
     "nexus-plugin-prisma": "^0.16.1",
