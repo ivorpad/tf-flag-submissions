@@ -1,0 +1,34 @@
+const { parse } = require("url");
+const express = require("express");
+const next = require("next");
+const cors = require("cors");
+const env = process.env.NODE_ENV || "development";
+const port = parseInt(process.env.PORT, 10) || 3000;
+const app = next({ dev: env === "development" });
+const handle = app.getRequestHandler();
+
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
+
+app.prepare().then(() => {
+  const server = express();
+
+  server.get("*", (req, res) => {
+    handle(req, res, parse(req.url, true));
+  });
+
+  server.post("*", (req, res) => {
+    handle(req, res, parse(req.url, true));
+  });
+
+  server.listen(port, (err) => {
+    if (err) throw err;
+    console.info(`> Ready on port ${port}`);
+  });
+});

@@ -1,7 +1,5 @@
-import { schema, use } from "nexus";
-import { prisma } from "nexus-plugin-prisma";
+import { schema,  } from "nexus";
 import { Reason } from "./Reason";
-use(prisma({ features: { crud: true } }));
 
 schema.objectType({
   name: "Reviewer",

@@ -1,6 +1,4 @@
-import { schema, use } from "nexus";
-import { prisma } from "nexus-plugin-prisma";
-use(prisma({ features: { crud: true } }));
+import { schema } from "nexus";
 
 export const Item = schema.objectType({
   name: "Item",
@@ -8,8 +6,8 @@ export const Item = schema.objectType({
     t.int("id");
     t.string("authorUsername");
     t.string("itemName");
-    // t.date?.("createdAt");
-    // t.date?.("updatedAt");
+    t.date?.("createdAt");
+    t.date?.("updatedAt");
   },
 });
 

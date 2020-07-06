@@ -15,10 +15,6 @@ const IndexPage = () => {
 }
 
 export const getServerSideProps = async (): Promise<any> => {
-  // const { PrismaClient } = require('@prisma/client');
-  // const prisma = new PrismaClient();
-  //const posts = await prisma.post.findMany();
-
   return {
     props: { }
   }

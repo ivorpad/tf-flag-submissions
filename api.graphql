@@ -18,6 +18,23 @@ input AuthorCreateWithoutReasonInput {
   username: String!
 }
 
+input AuthorUpdateOneRequiredWithoutReasonInput {
+  connect: AuthorWhereUniqueInput
+  create: AuthorCreateWithoutReasonInput
+  update: AuthorUpdateWithoutReasonDataInput
+  upsert: AuthorUpsertWithoutReasonInput
+}
+
+input AuthorUpdateWithoutReasonDataInput {
+  Item: ItemUpdateManyWithoutAuthorInput
+  username: String
+}
+
+input AuthorUpsertWithoutReasonInput {
+  create: AuthorCreateWithoutReasonInput!
+  update: AuthorUpdateWithoutReasonDataInput!
+}
+
 input AuthorWhereInput {
   AND: [AuthorWhereInput!]
   Item: ItemFilter
@@ -67,8 +84,10 @@ input IntFilter {
 
 type Item {
   authorUsername: String
+  createdAt: DateTime
   id: Int
   itemName: String
+  updatedAt: DateTime
 }
 
 input ItemCreateManyWithoutAuthorInput {
@@ -87,6 +106,62 @@ input ItemFilter {
   every: ItemWhereInput
   none: ItemWhereInput
   some: ItemWhereInput
+}
+
+input ItemScalarWhereInput {
+  AND: [ItemScalarWhereInput!]
+  authorUsername: NullableStringFilter
+  createdAt: DateTimeFilter
+  id: IntFilter
+  itemName: StringFilter
+  NOT: [ItemScalarWhereInput!]
+  OR: [ItemScalarWhereInput!]
+  submittedAt: NullableDateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ItemUpdateManyDataInput {
+  createdAt: DateTime
+  id: Int
+  itemName: String
+  submittedAt: DateTime
+  updatedAt: DateTime
+}
+
+input ItemUpdateManyWithoutAuthorInput {
+  connect: [ItemWhereUniqueInput!]
+  create: [ItemCreateWithoutAuthorInput!]
+  delete: [ItemWhereUniqueInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input ItemUpdateManyWithWhereNestedInput {
+  data: ItemUpdateManyDataInput!
+  where: ItemScalarWhereInput!
+}
+
+input ItemUpdateWithoutAuthorDataInput {
+  createdAt: DateTime
+  id: Int
+  itemName: String
+  submittedAt: DateTime
+  updatedAt: DateTime
+}
+
+input ItemUpdateWithWhereUniqueWithoutAuthorInput {
+  data: ItemUpdateWithoutAuthorDataInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutAuthorInput {
+  create: ItemCreateWithoutAuthorInput!
+  update: ItemUpdateWithoutAuthorDataInput!
+  where: ItemWhereUniqueInput!
 }
 
 input ItemWhereInput {
@@ -113,6 +188,9 @@ scalar Json
 
 type Mutation {
   createOneReason(data: ReasonCreateInput!): Reason!
+  deleteOneReason(where: ReasonWhereUniqueInput!): Reason
+  updateOneReason(data: ReasonUpdateInput!, where: ReasonWhereUniqueInput!): Reason
+  upsertOneReason(create: ReasonCreateInput!, update: ReasonUpdateInput!, where: ReasonWhereUniqueInput!): Reason!
 }
 
 input NullableDateTimeFilter {
@@ -168,6 +246,16 @@ input ReasonFilter {
   some: ReasonWhereInput
 }
 
+input ReasonUpdateInput {
+  Author: AuthorUpdateOneRequiredWithoutReasonInput
+  createdAt: DateTime
+  id: Int
+  reason: String
+  resolved: Boolean
+  Reviewer: ReviewerUpdateOneRequiredWithoutReasonInput
+  updatedAt: DateTime
+}
+
 input ReasonWhereInput {
   AND: [ReasonWhereInput!]
   Author: AuthorWhereInput
@@ -199,6 +287,22 @@ input ReviewerCreateOneWithoutReasonInput {
 
 input ReviewerCreateWithoutReasonInput {
   username: String!
+}
+
+input ReviewerUpdateOneRequiredWithoutReasonInput {
+  connect: ReviewerWhereUniqueInput
+  create: ReviewerCreateWithoutReasonInput
+  update: ReviewerUpdateWithoutReasonDataInput
+  upsert: ReviewerUpsertWithoutReasonInput
+}
+
+input ReviewerUpdateWithoutReasonDataInput {
+  username: String
+}
+
+input ReviewerUpsertWithoutReasonInput {
+  create: ReviewerCreateWithoutReasonInput!
+  update: ReviewerUpdateWithoutReasonDataInput!
 }
 
 input ReviewerWhereInput {
