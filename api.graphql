@@ -187,7 +187,7 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
-  createOneReason(data: ReasonCreateInput!): Reason!
+  createOneReason(authorId: String, reason: String, reviewerId: String): Reason!
   deleteOneReason(where: ReasonWhereUniqueInput!): Reason
   updateOneReason(data: ReasonUpdateInput!, where: ReasonWhereUniqueInput!): Reason
   upsertOneReason(create: ReasonCreateInput!, update: ReasonUpdateInput!, where: ReasonWhereUniqueInput!): Reason!
@@ -218,9 +218,14 @@ input NullableStringFilter {
   startsWith: String
 }
 
+enum OrderByArg {
+  asc
+  desc
+}
+
 type Query {
   getItemCount: Int!
-  reasons(after: ReasonWhereUniqueInput, before: ReasonWhereUniqueInput, first: Int, last: Int, where: ReasonWhereInput): [Reason!]!
+  reasons(after: ReasonWhereUniqueInput, before: ReasonWhereUniqueInput, first: Int, last: Int, orderBy: ReasonOrderByInput, where: ReasonWhereInput): [Reason!]!
 }
 
 type Reason {
@@ -244,6 +249,16 @@ input ReasonFilter {
   every: ReasonWhereInput
   none: ReasonWhereInput
   some: ReasonWhereInput
+}
+
+input ReasonOrderByInput {
+  authorId: OrderByArg
+  createdAt: OrderByArg
+  id: OrderByArg
+  reason: OrderByArg
+  resolved: OrderByArg
+  reviewerId: OrderByArg
+  updatedAt: OrderByArg
 }
 
 input ReasonUpdateInput {

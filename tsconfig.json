@@ -19,9 +19,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2016",
+    "target": "es2018",
     "sourceMap": true,
-    "outDir": "./dist",
     "rootDir": ".",
     "typeRoots": [
       "node_modules/@types",
@@ -40,6 +39,9 @@
     "**/*.ts",
     "**/*.tsx",
     "types.d.ts",
+    "./api",
+    "./api/*.ts",
+    "./api/graphql/*.ts",
     "."
   ]
 }

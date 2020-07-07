@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next",
     "build": "nexus build && next build",
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf .nexus",
     "start": "next start",
     "nexus:build": "nexus build --deployment vercel",
-    "nexus:start": "node -r esm ./dist",
+    "nexus:start": "node -r esm .nexus/build",
     "postinstall": "npx prisma generate",
     "type-check": "tsc"
   },
