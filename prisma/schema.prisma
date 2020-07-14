@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgres://"
+  url      = "postgres://ruminary:zknf5yivewD3Ihjb@tf-author-flaggin.c6yarnk1dspj.eu-west-3.rds.amazonaws.com/tf_flagging_db"
 }
 
 model Author {
